@@ -1,0 +1,28 @@
+
+    @keyframes react-reveal-534532921553036-1 {
+      0% {
+        opacity: 0;
+        transform: translate3d(-100%, 0px, 0px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .react-reveal {
+      opacity: 0;
+    }
+
+    @keyframes react-reveal-534532921553036-2 {
+      0% {
+        opacity: 0;
+        transform: translate3d(100%, 0px, 0px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: none;
+      }
+    }
