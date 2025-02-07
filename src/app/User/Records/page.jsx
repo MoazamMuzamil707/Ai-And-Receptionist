@@ -3,7 +3,11 @@ import React from 'react'
 
 function User() {
   return (
-    <div><UsersContainer /></div>
+    <div>
+      <NoAuthPagesLayout>
+        <UsersContainer />
+      </NoAuthPagesLayout>
+    </div>
   )
 }
 

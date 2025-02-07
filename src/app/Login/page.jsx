@@ -1,9 +1,13 @@
+"use client"
+import NoAuthPagesLayout from '@/components/layouts/noAuth';
 import LoginContainer from '../../containers/login'
 
 const Login = () => {
-    return(
+    return (
         <div>
-            <LoginContainer />
+            <NoAuthPagesLayout>
+                <LoginContainer />
+            </NoAuthPagesLayout>
         </div>
     )
 }

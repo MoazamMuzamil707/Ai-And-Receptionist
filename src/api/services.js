@@ -1,5 +1,5 @@
 import { post, get, put, patch, deleted } from './index';
-import { login, forgotPassword, permissions, endPointHelpdesk, endPointFetchCollections, endPointDeleteCollection, endPointSetupCollection, endPointDeleteDocument, endPointDownloadCollection, endPointDownloadFile, endPointLogin, endPointDashboard, endPointForgetPassword, endPointLogout } from './communications';
+import { login, forgotPassword, permissions, endPointHelpdesk, endPointFetchCollections, endPointDeleteCollection, endPointSetupCollection, endPointDeleteDocument, endPointDownloadCollection, endPointDownloadFile, endPointLogin, endPointDashboard, endPointForgetPassword, endPointLogout, endPointlogin } from './communications';
 
 import { endPointAllApi } from "./communications";
 import Cookies from 'js-cookie';
@@ -8,7 +8,7 @@ import Dashboard from '@/app/Dashboard/page';
 export const AuthServices = {
   login: async (obj) => {
     console.log("obj",obj)
-    const data = await post('Omni', endPointLogin, obj);
+    const data = await post(endPointlogin, obj);
     // if (data && data.data && data.data.token) {
     //   Cookies.set('token', data.data.token);
     //   Cookies.set('user', JSON.stringify(data.data));

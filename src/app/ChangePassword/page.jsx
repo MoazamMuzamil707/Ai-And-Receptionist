@@ -1,11 +1,14 @@
 "use client"
 
+import MainComponent from '@/components/Main'
 import ChangePasswordContainer from '@/containers/ChangePasswordContainer'
 import React from 'react'
 
 function ChangePasswaord() {
   return (
-    <div><ChangePasswordContainer /></div>
+    <MainComponent>
+    <ChangePasswordContainer />
+    </MainComponent>
   )
 }
 
