@@ -11,14 +11,16 @@ const TemplatesContainer = () => {
 
     return (
         <>
-            <SinglePage
-                module={"Whatsapp"}
-                pageTitle={"Templates"}
-                formData={settings.templateFormData}
-                onFormSubmit={onFormSubmit}
-                tableColumn={templateTableData}
-                tableType={"simple"}
-            />
+            <MainComponent BreadCrumbData={{}}>
+                <SinglePage
+                    module={"Whatsapp"}
+                    pageTitle={"Templates"}
+                    formData={settings.templateFormData}
+                    onFormSubmit={onFormSubmit}
+                    tableColumn={templateTableData}
+                    tableType={"simple"}
+                />
+            </MainComponent>
         </>
     )
 }

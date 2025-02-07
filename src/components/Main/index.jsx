@@ -1,34 +1,24 @@
-"use client";
-
-import { useEffect, useState } from "react";
+"use client"
 import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "@/slices";
-import ProtectedLayout from "@/components/layouts/protected";
-import Loader from "../common/Loader";
+import { configureStore } from "@reduxjs/toolkit";
+import rootReducer from "@/slices";
+import BreadCrumb from "@/components/common/BreadCrumb";
+import { Container } from "reactstrap";
+const store = configureStore({ reducer: rootReducer, devTools: true });
+const { default: ProtectedLayout } = require("@/components/layouts/protected")
 
 const MainComponent = ({ children }) => {
-  const [loading, setLoading] = useState(true);
+    return (
+        <>
+            <Provider store={store}>
+                <ProtectedLayout>
+                    <div className="page-content">
+                        {children}
+                    </div>
+                </ProtectedLayout>
+            </Provider>
+        </>
+    )
+}
 
-  // Simulate loading time or wait for any required setup
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 100); // Adjust timeout as needed
-    return () => clearTimeout(timer); // Clean up timer on unmount
-  }, []);
-
-  return (
-    <Provider store={store}>
-      <PersistGate loading={<Loader />} persistor={persistor}>
-        {loading ? (
-          <Loader /> // Show loader if loading is true
-        ) : (
-          <ProtectedLayout>
-            <div className="page-content">{children}</div>
-          </ProtectedLayout>
-        )}
-      </PersistGate>
-    </Provider>
-  );
-};
-
-export default MainComponent;
+export default MainComponent

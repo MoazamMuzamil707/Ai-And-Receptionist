@@ -44,7 +44,7 @@ const Input = ({
                 required={required}
                 disabled={disabled}
                 accept={type === 'file' ? accept : undefined}
-                // pattern={pattern}
+                pattern={pattern}
             />
             
             {err && (<div className="error-message">{errMsg}</div>)}

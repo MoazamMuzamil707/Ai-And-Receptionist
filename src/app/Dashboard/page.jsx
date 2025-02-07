@@ -1,15 +1,12 @@
 "use client"
-import React from 'react'
-import DashboardContainer from '@/containers/DashboardContainer'
-import MainComponent from '@/components/Main'
 
+import DashboardContainer from '@/containers/DashboardContainer'
+import React from 'react'
 
 function Dashboard() {
   return (
     <div>
-      <MainComponent>
         <DashboardContainer />
-      </MainComponent>
     </div>
   )
 }

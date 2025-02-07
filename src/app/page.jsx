@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+'use client'
 
-export default function Page() {
-  useEffect(() => {
-    console.log(window.location.href);
-  }, []);
+import React from 'react'
 
-  return <div>Hello World</div>;
+function page() {
+  return (
+    <div>page</div>
+  )
 }
+
+export default page

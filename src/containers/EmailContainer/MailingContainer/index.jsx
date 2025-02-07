@@ -10,13 +10,15 @@ const MailingContainer = () => {
 
     return (
         <>
-            {/* <SinglePage
+            <MainComponent BreadCrumbData={{}}>
+                {/* <SinglePage
                     module={"Email"}
                     pageTitle={"Mailing"}
                     formData={settings.workcodesFormData}
                     onFormSubmit={onFormSubmit}
 
                 /> */}
+            </MainComponent>
         </>
     )
 }

@@ -9,15 +9,17 @@ const ModuleContainer = () => {
     }
     return (
         <>
-            <SinglePage
-                // filters={false}
-                endpoint={modules}
-                module={"Settings"}
-                pageTitle={"Module"}
-                formData={settings.modules}
-                onFormSubmit={onFormSubmit}
-            // multistepForm={true}
-            />
+            <MainComponent BreadCrumbData={{}}>
+                <SinglePage
+                    // filters={false}
+                    endpoint={modules}
+                    module={"Settings"}
+                    pageTitle={"Module"}
+                    formData={settings.modules}
+                    onFormSubmit={onFormSubmit}
+                    // multistepForm={true}
+                />   
+            </MainComponent>
         </>
     )
 }

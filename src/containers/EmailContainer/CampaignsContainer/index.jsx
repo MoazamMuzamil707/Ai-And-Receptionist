@@ -10,12 +10,14 @@ const CampaignsContainer = () => {
 
     return (
         <>
-            {/* <SinglePage
+            <MainComponent BreadCrumbData={{}}>
+                {/* <SinglePage
                     module={"Email"}
                     pageTitle={"Campaigns"}
                     formData={settings.workcodesFormData}
                     onFormSubmit={onFormSubmit}
                 /> */}
+            </MainComponent>
         </>
     )
 }

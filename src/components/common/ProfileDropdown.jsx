@@ -10,13 +10,6 @@ import avatar1 from "@public/assets/images/users/avatar-1.jpg";
 import { createSelector } from 'reselect';
 import Cookies from 'js-cookie';
 import { redirect, useRouter } from 'next/navigation';
-import { AuthServices } from '@/api/services';
-import { logoutUserSuccess, resetUserState } from '@/slices/auth/login/reducer';
-import { useDispatch } from "react-redux";
-import Loader from './Loader';
-import { persistor } from '@/slices';
-import localStorage from 'redux-persist/es/storage';
-import { useSelector } from 'react-redux';
 
 const ProfileDropdown = () => {
 
@@ -25,22 +18,19 @@ const ProfileDropdown = () => {
         (user) => user
     );
     const [user, setUser] = useState({})
-    const [loading, setLoading] = useState(false)
-    const dispatch = useDispatch()
-    const userData = useSelector((state)=>state?.user?.data)
 
     useEffect(() => {
-        // if (userData) {
+        let userData = Cookies.get('user');
+        if (userData) {
             try {
-                const parsedUserData = JSON.parse(userData);
-                console.log("parsedUserData==>",parsedUserData)
+                const parsedUserData = JSON.parse(userData);    
                 setUser(parsedUserData);
             } catch (error) {
                 console.error("Error parsing userData:", error);
             }
-        // } else {
-        //     console.log("No user data found in cookies.");
-        // }
+        } else {
+            console.log("No user data found in cookies.");
+        }
     }, []);
 
     //Dropdown Toggle
@@ -49,28 +39,17 @@ const ProfileDropdown = () => {
         setIsProfileDropdown(!isProfileDropdown);
     };
     const router = useRouter();
-    async function logout() {
-        // setLoading(true);
-        await AuthServices.logout();
-        dispatch(resetUserState());
-        persistor.purge();
-        Cookies.remove("token");
-        router.push("/");
-        // setLoading(false);
+
+    const logout = () => {
+        Cookies.remove('token');
+        Cookies.remove('user');
+        router.push('/Login')
     }
 
     const changePassword = (event) => {
         event.preventDefault();
         router.push('/ChangePassword');
     };
-
-    // if (loading) {
-    //     return (
-    //         <div>
-    //             {/* <Loader fullWidth={true} /> */}
-    //         </div>
-    //     );
-    // }
 
     return (
         <React.Fragment>
@@ -128,16 +107,16 @@ const ProfileDropdown = () => {
                                         className="align-middle">Settings</span>
                         </Link>
                     </DropdownItem> */}
-                    <DropdownItem className='p-0'>
+                     <DropdownItem className='p-0'>
                         <button onClick={changePassword} className="dropdown-item" style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left' }}>
-                            <i className="mdi mdi-lock-reset text-muted fs-16 align-middle me-1"></i>
+                            <i className="mdi mdi-lock-reset text-muted fs-16 align-middle me-1"></i> 
                             <span className="align-middle">Change Password</span>
                         </button>
                     </DropdownItem>
 
                     <DropdownItem className='p-0'>
                         <button onClick={logout} className="dropdown-item" style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left' }}>
-                            <i className="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
+                            <i className="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> 
                             <span className="align-middle" data-key="t-logout">Logout</span>
                         </button>
                     </DropdownItem>

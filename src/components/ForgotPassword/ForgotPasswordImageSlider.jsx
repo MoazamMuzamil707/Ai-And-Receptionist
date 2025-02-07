@@ -28,7 +28,7 @@ const ForgotPasswordImageSlider = () => {
                                 </div>
                                 <div className="carousel-inner text-center text-white-50 pb-5">
                                     <div className="carousel-item active">
-                                        <p className="fs-15 fst-italic">Empowering Businesses with AI-Driven Automation: Your Ultimate Virtual Assistant Solution!</p>
+                                        <p className="fs-15 fst-italic"> Connecting Tomorrow Possibilities: Your End-to-End Omni channel Solution.! </p>
                                     </div>
                                     {/* < div className="carousel-item">
                                         <p className="fs-15 fst-italic">" The theme is really great with an amazing customer support."

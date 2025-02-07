@@ -9,14 +9,16 @@ const RoleContainer = () => {
     }
     return (
         <>
-            <SinglePage
-                filters={false}
-                module={"Settings"}
-                pageTitle={"Roles"}
-                formData={settings.rolesFormData}
-                onFormSubmit={onFormSubmit}
-                tableType={"simple"}
-            />
+            <MainComponent BreadCrumbData={{}}>
+                <SinglePage
+                    filters={false}
+                    module={"Settings"}
+                    pageTitle={"Roles"}
+                    formData={settings.rolesFormData}
+                    onFormSubmit={onFormSubmit}
+                    tableType={"simple"}
+                />   
+            </MainComponent>
         </>
     )
 }

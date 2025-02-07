@@ -19,7 +19,7 @@ const Navdata = () => {
 
   const checkEndpoint = (items, path) => {
     for (const item of items) {
-      if (path.includes(item.link) || path === "/") {
+      if (path.includes(item.link) || path === "/Login") {
         return true;
       }
       if (item.subItems && checkEndpoint(item.subItems, path)) {
@@ -53,8 +53,8 @@ const Navdata = () => {
           Cookies.remove("token");
           Cookies.remove("user");
           Cookies.remove("menuData");
-          router.push("/");
-          redirect("/");
+          router.push("/Login");
+          redirect("/Login");
         } else {
           let updatedData = RoutePermissions?.map((rec) => ({
             ...rec,

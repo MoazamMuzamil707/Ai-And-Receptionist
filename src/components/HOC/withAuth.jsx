@@ -3,39 +3,51 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from 'js-cookie';
 import Loader from "../common/Loader";
-import { useSelector } from "react-redux";
 
 export const withAuth = (WrappedComponent) => {
   const Auth = (props) => {
     const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const token = useSelector((state) => state?.Login?.user?.data?.token); // Get the token outside useEffect
     const currentPath = router.asPath;
-
+    
+    // const checkEndpoint = (items, path) => {
+    //   for (const item of items) {
+    //     if (item.link === path) {
+    //       return true;
+    //     }
+    //     if (item.subItems && checkEndpoint(item.subItems, path)) {
+    //       return true;
+    //     }
+    //   }
+    //   return false;
+    // };
     useEffect(() => {
-      console.log("token", token);
-      setLoading(false); 
-      
-      // Check if the token exists
+      // const menuData = Cookies.get('menuData') ? JSON.parse(Cookies.get('menuData')) : null;
+      // const endpointExists = checkEndpoint(menuData, currentPath);
+      const token = Cookies.get('token');
+      console.log("token",token)
+      // console.log("token in withAuth", token, menuData);
       if (!token) {
-        // If there's no token, remove cookies and redirect
+      // if (!token || !endpointExists) {
         Cookies.remove('token');
-        router.push('/');
+        Cookies.remove('menuData');
+        Cookies.remove('user');
+        router.push('/Login');
       } else {
-        // If there's a token, set authenticated state
         setIsAuthenticated(true);
+        setLoading(false);
       }
-// Set loading to false after checking token
-    }, [token, router]); // Depend on token and router
+    }, [router]);
 
-    if (loading) {
-      return (
-        <div>
-          <Loader fullWidth={true} />
-        </div>
-      );
-    }
+    
+
+    // if (loading) {
+    //   return 
+    //   // <div>
+    //   //   <Loader fullWidth={true} />
+    //   // </div>;
+    // }
 
     return isAuthenticated ? <WrappedComponent {...props} /> : null;
   };

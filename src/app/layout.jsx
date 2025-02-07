@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
         <meta charset="UTF-8" />
         <link rel="icon" href={fav.src} />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
+        {/* <meta name="theme-color" content="#000000" /> */}
         <meta name="description" content="Web site created using create-react-app" />
         <link rel="apple-touch-icon" href="https://conceptionone.vercel.app/logo192.png" />
         <link rel="manifest" href="https://conceptionone.vercel.app/manifest.json" />  
@@ -27,11 +27,11 @@ export default function RootLayout({ children }) {
         <link href="main.61e0dd9d.css" rel="stylesheet" />
       </head>
       <body
-      // className={
-      //   process.env.HIDE_NEXT_ERROR_OVERLAY === "true"
-      //     ? "hide-nextjs-portal"
-      //     : undefined
-      // }
+      className={
+        process.env.HIDE_NEXT_ERROR_OVERLAY === "true"
+          ? "hide-nextjs-portal"
+          : undefined
+      }
       >
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>

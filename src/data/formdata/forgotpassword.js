@@ -6,7 +6,7 @@ module.exports.forgotpasswordFormData = [
         label: 'Email', 
         value:"",
         required: true,
-        pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+        pattern: "^[\\w.-]+@[\\w-]+\\.[\\w]{2,4}$",
         err: false,
         errMsg: "",
         placeHolder: "example@gmail.com", 

@@ -8,25 +8,20 @@ import axios from "axios";
 import { permissions } from "@/api/communications";
 import Cookies from "js-cookie";
 import { RoutePermissions } from "@/data/permissionsdata/RoutePermissions";
-import SuccessModal from "../modals/sweetAlerts/success";
 
 const ForgotPasswordFormSection = () => {
     const [openErrorModal, setOpenErrorModal] = useState(false)
-    const [errorResponseMsg, setErrorResponseMsg] = useState({ email: "", password: "" });
     const router = useRouter();
     const handleSubmit = async (formData) => {
         console.log('Form Data:', formData);
-        const data = await AuthServices.forgotPassword(formData);
-
+        const data = await AuthServices.forgotpassword(formData);
         if(data?.status == 'success') {
             // const result = await axios.get(process.env.NEXT_PUBLIC_API_BASE_URL + "/" + permissions, { headers: { 'Authorization': `Bearer ${Cookies.get('token')}` } });
-            console.log("forgotPassword",data)
-            // if(result) {
-            //     router.push('/Login')
-            // }
+            if(result) {
+                Cookies.set("menuData", JSON.stringify(RoutePermissions))
+                router.push('/Login')
+            }
 
-            setOpenErrorModal(!openErrorModal)
-            setErrorResponseMsg(data?.message)
         } else {
             alert(data)
             // alert(data?.message)
@@ -43,22 +38,13 @@ const ForgotPasswordFormSection = () => {
                             <p className="text-muted">Enter registered username to receive recovery email</p>
                         </div>
                         <div>
-                            <img src="/assets/images/DarkLogo.png" width="50" height="60" />
+                            <img src="/assets/images/logo-m3.png" width="50" height="60" />
                         </div>
                     </div>
                     <FormBuilder formConfig={forgotpassword.forgotpasswordFormData} onSubmit={handleSubmit} buttonText={"Send Login Link"} />
                 </div>
             </div >
-            {/* <SuccessModal
-                isOpen={successModal}
-                tog_successMessage={setSuccessModal}
-                successResponseMsg={successResponse.msg}
-            /> */}
-            {/* <ErrorModal
-                isOpen={openErrorModal}
-                tog_errorMessage={setOpenErrorModal}
-                errorResponseMsg={errorResponse.msg}
-            /> */}
+            <ErrorModal isOpen={openErrorModal} tog_errorMessage={setOpenErrorModal} />
         </>
     )
 }

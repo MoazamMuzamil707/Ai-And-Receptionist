@@ -9,7 +9,8 @@ const UsersContainer = () => {
     }
     return (
         <>
-            {/* <SinglePage
+            <MainComponent BreadCrumbData={{}}>
+                {/* <SinglePage
                     // filters={false}
                     endpoint={users}
                     module={"Settings"}
@@ -18,6 +19,7 @@ const UsersContainer = () => {
                     onFormSubmit={onFormSubmit}
                     // multistepForm={true}
                 />    */}
+            </MainComponent>
         </>
     )
 }

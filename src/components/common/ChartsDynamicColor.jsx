@@ -3,7 +3,7 @@ const getChartColorsArray = (colors) => {
     return colors?.map(function (value) {
         var newValue = value.replace(" ", "");
         if (newValue.indexOf(",") === -1) {
-            var color = getComputedStyle(document?.documentElement)?    .getPropertyValue(newValue);
+            var color = getComputedStyle(document.documentElement).getPropertyValue(newValue);
 
             if (color.indexOf("#") !== -1)
                 color = color.replace(" ", "");

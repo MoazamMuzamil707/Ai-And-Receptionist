@@ -1,6 +1,7 @@
 import ChangePasswaord from "@/app/ChangePassword/page"
 import BreadCrumb from "@/components/common/BreadCrumb"
 import FormBuilder from "@/components/formbuilder"
+import MainComponent from "@/components/Main"
 import ErrorModal from "@/components/modals/sweetAlerts/error"
 import SinglePage from "@/components/SinglePageComponent"
 import { auth } from "@/data/formdata"
@@ -38,6 +39,7 @@ const ChangePasswordContainer = () => {
 
     return (
         <>
+            <MainComponent BreadCrumbData={{}}>
                 <Container fluid>
                     <BreadCrumb title={"Setting"} pageTitle={"Change Password"} />
                     <Row>
@@ -63,6 +65,7 @@ const ChangePasswordContainer = () => {
                         </Col>
                     </Row>
                 </Container>
+            </MainComponent>
             <ErrorModal isOpen={openErrorModal} errorResponseMsg={errorResponseMsg} tog_errorMessage={setOpenErrorModal} />
         </>
     )

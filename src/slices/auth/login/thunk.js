@@ -1,17 +1,56 @@
-import { AuthServices } from '@/api/services';
+//Include Both Helper File with needed methods
+import { getFirebaseBackend } from "../../../helpers/firebase_helper";
+import {
+  postFakeLogin,
+  postJwtLogin,
+  postSocialLogin,
+} from "../../../helpers/fakebackend_helper";
+
 import { loginSuccess, logoutUserSuccess, apiError, reset_login_flag } from './reducer';
-import Cookies from 'js-cookie';
+
+// const fireBaseBackend = getFirebaseBackend();
 
 export const loginUser = (user, history) => async (dispatch) => {
   try {
-    console.log("user",user)
-    const response = await AuthServices.login(user);
-    // dispatch(loginSuccess({...response, cnic: user.userId}));
-    console.log("response===>>",response)
-    if(response.status != "success") return response
-    dispatch(loginSuccess(response));
-    Cookies.set("token", response?.data?.token)
-    history.push("/Dashboard")
+    let response;
+    if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
+      let fireBaseBackend = getFirebaseBackend();
+      response = fireBaseBackend.loginUser(
+        user.email,
+        user.password
+      );
+    } else if (process.env.REACT_APP_DEFAULTAUTH === "jwt") {
+      response = postJwtLogin({
+        email: user.email,
+        password: user.password
+      });
+
+    } else if (process.env.REACT_APP_API_URL) {
+      response = postFakeLogin({
+        email: user.email,
+        password: user.password,
+      });
+    }
+
+    var data = await response;
+
+    if (data) {
+      sessionStorage.setItem("authUser", JSON.stringify(data));
+      if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
+        var finallogin = JSON.stringify(data);
+        finallogin = JSON.parse(finallogin)
+        data = finallogin.data;
+        if (finallogin.status === "success") {
+          dispatch(loginSuccess(data));
+          history('/dashboard')
+        } else {
+          dispatch(apiError(finallogin));
+        }
+      } else {
+        dispatch(loginSuccess(data));
+        history('/dashboard')
+      }
+    }
   } catch (error) {
     dispatch(apiError(error));
   }

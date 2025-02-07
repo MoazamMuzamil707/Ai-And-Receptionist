@@ -1,19 +1,15 @@
 import { useEffect } from 'react';
 import { useRouter } from "next/navigation";
 import Cookies from 'js-cookie';
-import { useSelector } from 'react-redux';
 
 export const useRequireAuth = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const token = useSelector((state) => state?.Login?.user?.data?.token);
-    const headers = {
-      'Authorization': `Bearer ${token}`
-    };
+    const token = Cookies.get('token');
 
     if (!token) {
-      router.push('/');
+      router.push('/'); // Redirect to login page if token cookie doesn't exist
     }
   }, []);
 };

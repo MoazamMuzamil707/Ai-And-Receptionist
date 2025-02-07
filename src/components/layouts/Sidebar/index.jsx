@@ -12,9 +12,6 @@ import VerticalLayout from "../VerticalLayouts";
 import TwoColumnLayout from "../TwoColumnLayout";
 import { Container } from "reactstrap";
 import HorizontalLayout from "../HorizontalLayout";
-import { AuthServices } from "@/api/services";
-import { logoutUserSuccess } from "@/slices/auth/login/reducer";
-import Cookies from "js-cookie";
 
 const Sidebar = ({ layoutType }) => {
 
@@ -37,17 +34,6 @@ const Sidebar = ({ layoutType }) => {
       document.documentElement.setAttribute('data-sidebar-size', 'sm-hover');
     }
   };
-
-  async function clearAllData() {
-    setLoading(true);
-    await AuthServices.logout();
-    dispatch(logoutUserSuccess());
-    persistor.purge();
-    Cookies.remove("token");
-    router.push("/");
-    localStorage.clear();
-    setLoading(false);
-  }
 
   return (
     <React.Fragment>
